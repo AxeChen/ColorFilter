@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/itemContent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
+
+    <com.mg.axe.colorfilter.filter.FilterItemView
+        android:id="@+id/itemImg"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/itemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/itemImg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="原图"
+        android:textSize="12sp" />
+
+</RelativeLayout>
