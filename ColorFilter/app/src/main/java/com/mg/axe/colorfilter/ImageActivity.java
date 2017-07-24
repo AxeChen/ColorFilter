@@ -27,19 +27,26 @@ public class ImageActivity extends AppCompatActivity {
 
     private ImageView imageView;
     private Button btn;
+    private Button maskBtn;
 
     String path = Environment.getExternalStorageDirectory().getPath() + File.separator + "com.mg.axe.colorfilters" + File.separator;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //1、判断是否有打电话的权限
         checkPermisson();
         setContentView(R.layout.activity_image);
         imageView = (ImageView) findViewById(R.id.fImage);
         btn = (Button) findViewById(R.id.btnMatrx);
 
-//        imageView.setImageBitmap(bitmap);
+        maskBtn = (Button) findViewById(R.id.btnMask);
+        maskBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ImageActivity.this, MaskActivity.class);
+                startActivity(intent);
+            }
+        });
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,11 +69,7 @@ public class ImageActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case PERMISSION_FILE:
-//                if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
-//                    call();
-//                }else{
-//                    //用户没有授予权限，
-//                }
+
                 break;
         }
     }
