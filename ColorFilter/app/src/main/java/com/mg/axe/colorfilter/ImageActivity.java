@@ -29,6 +29,7 @@ public class ImageActivity extends AppCompatActivity {
     private Button btn;
     private Button maskBtn;
     private Button adjustBtn;
+    private Button setMatrix;
 
     String path = Environment.getExternalStorageDirectory().getPath() + File.separator + "com.mg.axe.colorfilters" + File.separator;
 
@@ -39,8 +40,16 @@ public class ImageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_image);
         imageView = (ImageView) findViewById(R.id.fImage);
         btn = (Button) findViewById(R.id.btnMatrx);
-
+        setMatrix = (Button) findViewById(R.id.btnSetMatrix);
         adjustBtn = (Button) findViewById(R.id.btnAdjust);
+        setMatrix.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ImageActivity.this, ColorMatrixSetActivity.class);
+                startActivity(intent);
+            }
+        });
+
         adjustBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

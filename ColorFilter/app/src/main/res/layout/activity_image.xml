@@ -28,7 +28,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/btnMatrx"
+        android:layout_toRightOf="@+id/btnMask"
         android:text="调整" />
+
+    <Button
+        android:id="@+id/btnSetMatrix"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/btnAdjust"
+        android:text="调整矩阵" />
 
 </RelativeLayout>
