@@ -23,4 +23,12 @@
         android:layout_toRightOf="@+id/btnMatrx"
         android:text="加模糊" />
 
+    <Button
+        android:id="@+id/btnAdjust"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/btnMatrx"
+        android:text="调整" />
+
 </RelativeLayout>

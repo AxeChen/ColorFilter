@@ -28,6 +28,7 @@ public class ImageActivity extends AppCompatActivity {
     private ImageView imageView;
     private Button btn;
     private Button maskBtn;
+    private Button adjustBtn;
 
     String path = Environment.getExternalStorageDirectory().getPath() + File.separator + "com.mg.axe.colorfilters" + File.separator;
 
@@ -39,6 +40,14 @@ public class ImageActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.fImage);
         btn = (Button) findViewById(R.id.btnMatrx);
 
+        adjustBtn = (Button) findViewById(R.id.btnAdjust);
+        adjustBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ImageActivity.this, AdjustActivity.class);
+                startActivity(intent);
+            }
+        });
         maskBtn = (Button) findViewById(R.id.btnMask);
         maskBtn.setOnClickListener(new View.OnClickListener() {
             @Override

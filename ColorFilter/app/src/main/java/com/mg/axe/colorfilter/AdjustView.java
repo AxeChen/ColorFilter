@@ -85,8 +85,9 @@ public class AdjustView extends FilterView {
      */
     public void changeLight(float light) {
         colorMatrix = new ColorMatrix();
-        colorMatrix.setScale(light, light, light, light);
+        colorMatrix.setScale(light, light, light, 1f);
         colorMatrixColorFilter = new ColorMatrixColorFilter(colorMatrix);
+        invalidate();
     }
 
     /**
@@ -96,6 +97,7 @@ public class AdjustView extends FilterView {
         colorMatrix = new ColorMatrix();
         colorMatrix.setSaturation(saturaction);
         colorMatrixColorFilter = new ColorMatrixColorFilter(colorMatrix);
+        invalidate();
     }
 
     @Override
@@ -120,8 +122,8 @@ public class AdjustView extends FilterView {
     protected void onDraw(Canvas canvas) {
         paint.reset();
         paint.setAntiAlias(true);
-        if (bitmap == null || colorMatrix == null) {
-            return;
+        if (blurMaskFilter != null) {
+            paint.setMaskFilter(blurMaskFilter);
         }
         paint.setColorFilter(colorMatrixColorFilter);
         canvas.drawBitmap(bitmap, null, rectF, paint);
