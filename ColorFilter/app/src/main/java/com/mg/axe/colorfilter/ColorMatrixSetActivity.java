@@ -10,7 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.mg.axe.colorfilter.filter.FilterImageView;
+
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,11 +68,13 @@ public class ColorMatrixSetActivity extends AppCompatActivity {
     @BindView(R.id.t)
     EditText et;
     @BindView(R.id.adjustView)
-    AdjustView adjustView;
+    FilterImageView adjustView;
     @BindView(R.id.btnRest)
     Button btnRest;
     @BindView(R.id.btnApply)
     Button btnApply;
+
+    private List<EditText> editTexts = new ArrayList<>();
 
     private float a = 1f, b, c, d, e,
             f, g = 1f, h, i, j,
@@ -82,31 +88,92 @@ public class ColorMatrixSetActivity extends AppCompatActivity {
             p, q, r, s, t,
     };
 
+    private float[] colorMatrixValue = new float[20];
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matrix_adjust);
         ButterKnife.bind(this);
         setImage();
+        adjustView.setFloat(floats);
         setDefaultValue();
+        initEditTextList();
         initListener();
+    }
+
+    private void initEditTextList() {
+        editTexts.add(ea);
+        editTexts.add(eb);
+        editTexts.add(ec);
+        editTexts.add(ed);
+        editTexts.add(ee);
+        editTexts.add(ef);
+        editTexts.add(eg);
+        editTexts.add(eh);
+        editTexts.add(ei);
+        editTexts.add(ej);
+        editTexts.add(ek);
+        editTexts.add(el);
+        editTexts.add(em);
+        editTexts.add(en);
+        editTexts.add(eo);
+        editTexts.add(ep);
+        editTexts.add(eq);
+        editTexts.add(ei);
+        editTexts.add(es);
+        editTexts.add(et);
     }
 
     public void initListener() {
         btnApply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                apply();
             }
         });
 
         btnRest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                reset();
             }
         });
     }
+
+    private void apply() {
+
+        for (int i = 0; i < editTexts.size(); i++) {
+            colorMatrixValue[i] = Float.parseFloat(editTexts.get(i).getText().toString());
+        }
+        adjustView.setFloat(colorMatrixValue);
+    }
+
+    private void reset() {
+        a = 1f;
+        b = 0f;
+        c = 0f;
+        d = 0f;
+        e = 0f;
+        f = 0f;
+        g = 1f;
+        h = 0f;
+        i = 0f;
+        j = 0f;
+        k = 0f;
+        l = 0f;
+        m = 1f;
+        n = 0f;
+        o = 0f;
+        p = 0f;
+        q = 0f;
+        r = 0;
+        s = 1f;
+        t = 0f;
+        setDefaultValue();
+        adjustView.setFloat(floats);
+    }
+
 
     public void setDefaultValue() {
         ea.setText(a + "");
