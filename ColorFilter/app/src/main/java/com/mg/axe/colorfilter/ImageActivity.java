@@ -13,9 +13,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.mg.axe.colorfilter.filter.FilterImageShowView;
+import com.mg.axe.colorfilter.filter.FilterImageView;
+import com.mg.axe.colorfilter.utils.Utils;
 
 import java.io.File;
 
@@ -25,23 +30,31 @@ import java.io.File;
 
 public class ImageActivity extends AppCompatActivity {
 
-    private ImageView imageView;
+    public static final String TAG_STRING_IMAGE_URL = "tagStringImageUrl";
+
+    private FilterImageShowView imageView;
     private Button btn;
     private Button maskBtn;
     private Button adjustBtn;
     private Button setMatrix;
 
-    String path = Environment.getExternalStorageDirectory().getPath() + File.separator + "com.mg.axe.colorfilters" + File.separator;
+    public String imageUrl;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        checkPermisson();
         setContentView(R.layout.activity_image);
-        imageView = (ImageView) findViewById(R.id.fImage);
+        imageUrl = getIntent().getStringExtra(TAG_STRING_IMAGE_URL);
+
+        imageView = (FilterImageShowView) findViewById(R.id.fImage);
         btn = (Button) findViewById(R.id.btnMatrx);
         setMatrix = (Button) findViewById(R.id.btnSetMatrix);
         adjustBtn = (Button) findViewById(R.id.btnAdjust);
+        maskBtn = (Button) findViewById(R.id.btnMask);
+        if (TextUtils.isEmpty(imageUrl)) {
+            return;
+        }
+        setImageBitmap();
         setMatrix.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +70,6 @@ public class ImageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        maskBtn = (Button) findViewById(R.id.btnMask);
         maskBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,34 +86,16 @@ public class ImageActivity extends AppCompatActivity {
         });
     }
 
-    public final static int PERMISSION_FILE = 1;
-
-    public void checkPermisson() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            //没有获取权限则做权限处理
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_FILE);
-        }
+    private void setImageBitmap() {
+        Bitmap bitmap = Utils.readBitmap(imageUrl, 2);
+        imageView.setImageBitmap(bitmap);
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSION_FILE:
-
-                break;
-        }
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == 1000) {
-//            if (resultCode == Activity.RESULT_OK) {
-//                Bitmap bitmap = data.getParcelableExtra("bitmap");
-//                imageView.setImageBitmap(bitmap);
-//            }
-//        }
-        Bitmap bitmap = BitmapFactory.decodeFile(path + "cachetest.jpg");
-        imageView.setImageBitmap(bitmap);
+//        Bitmap bitmap = BitmapFactory.decodeFile(imageUrl);
+//        imageView.setImageBitmap(bitmap);
     }
 }

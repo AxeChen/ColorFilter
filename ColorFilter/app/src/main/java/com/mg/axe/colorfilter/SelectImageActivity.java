@@ -4,20 +4,20 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.mg.axe.colorfilter.utils.FileUtils;
+
 import java.io.File;
+import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,8 +30,8 @@ import butterknife.ButterKnife;
 
 public class SelectImageActivity extends AppCompatActivity {
 
-    private static int REQUEST_THUMBNAIL = 1;// 请求缩略图信号标识
-    private static int REQUEST_ORIGINAL = 2;// 请求原图信号标识
+    private static int REQUEST_CAMERA = 1;// 请求缩略图信号标识
+    private static int REQUEST_ALBUM = 2;// 请求原图信号标识
 
     private static int PERMISSION_CAMERA = 100;
 
@@ -40,15 +40,12 @@ public class SelectImageActivity extends AppCompatActivity {
     @BindView(R.id.btnTakePhoto)
     Button btnTakePhoto;
 
-    private String picPath;//图片存储路径
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_select);
         ButterKnife.bind(this);
-        picPath = Environment.getExternalStorageDirectory().getPath() + "/" + "temp.png";
         initListener();
     }
 
@@ -95,41 +92,51 @@ public class SelectImageActivity extends AppCompatActivity {
     }
 
     private void takePhoto() {
-        Intent intent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // 启动相机
-        startActivityForResult(intent1, REQUEST_THUMBNAIL);
+        Intent intent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        File file = new File(FileUtils.TEMPFILE);
+        if (!file.exists()) {
+            file.getParentFile().mkdirs();
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        Uri uri = Uri.fromFile(file);
+        intent2.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+        startActivityForResult(intent2, REQUEST_CAMERA);
     }
 
     private void selectPhoto() {
-//        Intent intent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        Uri uri = Uri.fromFile(new File(picPath));
-////为拍摄的图片指定一个存储的路径
-//        intent2.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-//        startActivityForResult(intent2, REQUEST_ORIGINAL);
-
         Intent intent = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, REQUEST_ORIGINAL);
+        startActivityForResult(intent, REQUEST_ALBUM);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_ORIGINAL) {
+        if (requestCode == REQUEST_ALBUM) {
             //从相册中选择图片
             Uri selectedImage = data.getData();
             String[] filePathColumns = {MediaStore.Images.Media.DATA};
             Cursor c = getContentResolver().query(selectedImage, filePathColumns, null, null, null);
-            c.moveToFirst();
-            int columnIndex = c.getColumnIndex(filePathColumns[0]);
-            String imagePath = c.getString(columnIndex);
-            c.close();
-
-        } else if (requestCode == REQUEST_THUMBNAIL) {
+            if (c != null) {
+                c.moveToFirst();
+                int columnIndex = c.getColumnIndex(filePathColumns[0]);
+                String imagePath = c.getString(columnIndex);
+                intentImageActivity(imagePath);
+                c.close();
+            }
+        } else if (requestCode == REQUEST_CAMERA) {
             //拍照
-            Bundle bundle = data.getExtras();
-            Bitmap bitmap = (Bitmap) bundle.get("data");
-            Log.i("adsf", "asdf");
+            intentImageActivity(FileUtils.TEMPFILE);
         }
+    }
+
+    private void intentImageActivity(String url) {
+        Intent intent = new Intent(SelectImageActivity.this, ImageActivity.class);
+        intent.putExtra(ImageActivity.TAG_STRING_IMAGE_URL, url);
+        startActivity(intent);
     }
 }
