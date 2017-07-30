@@ -28,12 +28,10 @@ import butterknife.ButterKnife;
  * @Description 选择图片（拍照+自己选择照片）
  */
 
-public class SelectImageActivity extends AppCompatActivity {
+public class SelectImageActivity extends BaseActivity {
 
     private static int REQUEST_CAMERA = 1;// 请求缩略图信号标识
     private static int REQUEST_ALBUM = 2;// 请求原图信号标识
-
-    private static int PERMISSION_CAMERA = 100;
 
     @BindView(R.id.btnSelectFromXiangce)
     Button btnSelectFromXiangce;
@@ -43,50 +41,28 @@ public class SelectImageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_select);
         ButterKnife.bind(this);
         initListener();
     }
-
-    //申请权限
-    private void requestCameraPermiss() {
-        //1、判断是否有打电话的权限
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            //没有获取权限则做权限处理
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_CAMERA);
-        } else {
-            takePhoto();
-        }
-    }
-
-    private void requestAlbumPermiss() {
-        //1、判断是否有打电话的权限
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            //没有获取权限则做权限处理
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_CAMERA);
-
-        } else {
-            selectPhoto();
-        }
-
-    }
-
 
     private void initListener() {
 
         btnSelectFromXiangce.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requestAlbumPermiss();
-
+                if (requestAlbumPermiss()) {
+                    takePhoto();
+                }
             }
         });
 
         btnTakePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requestCameraPermiss();
+                if (requestCameraPermiss()) {
+                    selectPhoto();
+                }
             }
         });
     }
@@ -117,7 +93,6 @@ public class SelectImageActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_ALBUM) {
-            //从相册中选择图片
             Uri selectedImage = data.getData();
             String[] filePathColumns = {MediaStore.Images.Media.DATA};
             Cursor c = getContentResolver().query(selectedImage, filePathColumns, null, null, null);

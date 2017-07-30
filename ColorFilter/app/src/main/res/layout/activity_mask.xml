@@ -2,33 +2,36 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     android:orientation="vertical">
 
-    <com.mg.axe.colorfilter.mask.MaskView
+    <com.mg.axe.colorfilter.filter.FilterImageView
         android:id="@+id/maskView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="0.1px" />
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:gravity="center_vertical"
+        android:layout_alignParentBottom="true"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_alignParentBottom="true">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
-            android:text="模糊宽度："
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="模糊宽度：" />
 
         <SeekBar
 
             android:id="@+id/sbMask"
-            android:max="100"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:max="100" />
 
     </LinearLayout>
 

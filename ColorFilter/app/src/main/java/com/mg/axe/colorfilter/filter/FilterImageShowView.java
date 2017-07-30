@@ -87,7 +87,7 @@ public class FilterImageShowView extends FilterView {
             scaleWidth = screenWidth;
         } else if (bWidth < bHeight) {
             //最大高为屏幕的 5/6
-            int maxHeight = screenHeight*5/6;
+            int maxHeight = screenHeight * 5 / 6;
             if (bHeight > maxHeight) {
                 scale = bHeight * 1f / maxHeight * 1f;
                 scaleWidth = (int) (bWidth * 1f / scale);

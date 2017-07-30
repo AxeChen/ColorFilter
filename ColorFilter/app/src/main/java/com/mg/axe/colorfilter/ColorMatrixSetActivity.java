@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
  * @Description Content
  */
 
-public class ColorMatrixSetActivity extends AppCompatActivity {
+public class ColorMatrixSetActivity extends BaseActivity {
 
     @BindView(R.id.a)
     EditText ea;

@@ -4,9 +4,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,46 +28,79 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-    public FilterImageView filterImageView;
-    public RecyclerView recyclerView;
+public class MainActivity extends BaseActivity {
+
     public List<FilterBean> beenList = new ArrayList<>();
     public Bitmap bitmap;
     public Bitmap itemBitmap;
     public Button okBtn;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.fImage)
+    FilterImageView fImage;
+    @BindView(R.id.btnOk)
+    Button btnOk;
+    @BindView(R.id.matrixSelect)
+    RecyclerView matrixSelect;
 
+    private ActionBar bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        filterImageView = (FilterImageView) findViewById(R.id.fImage);
-        recyclerView = (RecyclerView) findViewById(R.id.matrixSelect);
+        ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
+
+        bar = getSupportActionBar();
+        bar.setDefaultDisplayHomeAsUpEnabled(true);
+        bar.setHomeButtonEnabled(true);
+        bar.setDisplayHomeAsUpEnabled(true);
+        bar.setDisplayShowHomeEnabled(true);
+
+        imageUrl = getIntent().getStringExtra(TAG_STRING_IMAGE_URL);
+        fImage = (FilterImageView) findViewById(R.id.fImage);
+        matrixSelect = (RecyclerView) findViewById(R.id.matrixSelect);
         okBtn = (Button) findViewById(R.id.btnOk);
-        bitmap = Utils.readBitmap(this, R.mipmap.damimi, 2);
         itemBitmap = Utils.readBitmap(this, R.mipmap.damimi, 4);
-        filterImageView.setImageBitmap(bitmap);
-        filterImageView.setFloat(ColorMatrixValue.src);
+        fImage.setImageBitmap(bitmap);
+        fImage.setFloat(ColorMatrixValue.src);
         getFilterDatas();
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setAdapter(new ColorFilterAdapter());
+        matrixSelect.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        matrixSelect.setAdapter(new ColorFilterAdapter());
 
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveBitmapFile(filterImageView.getChangeBitmap());
+                saveBitmapFile(fImage.getChangeBitmap());
                 Intent intent = new Intent();
                 setResult(RESULT_OK, intent);
                 finish();
             }
         });
 
+        setImageBitmap();
+        setItemBitmap();
+
+    }
+
+    private String imageUrl;
+
+    private void setImageBitmap() {
+        Bitmap bitmap = Utils.readBitmap(imageUrl, 2);
+        fImage.setImageBitmap(bitmap);
+        fImage.setFloat(ColorMatrixValue.src);
+    }
+
+    private void setItemBitmap() {
+        itemBitmap = Utils.readBitmap(imageUrl, 5);
     }
 
     public void saveBitmapFile(Bitmap bitmap) {
         String path = Environment.getExternalStorageDirectory().getPath() + File.separator + "com.mg.axe.colorfilters" + File.separator;
-
 
         try {
             File file = new File(path + "cachetest.jpg");//将要保存图片的路径
@@ -138,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
                         int index = getAdapterPosition();
                         if (index >= 0) {
                             FilterBean bean = beenList.get(index);
-                            filterImageView.setFloat(bean.getFilterFloats());
+                            fImage.setFloat(bean.getFilterFloats());
                         }
                     }
                 });

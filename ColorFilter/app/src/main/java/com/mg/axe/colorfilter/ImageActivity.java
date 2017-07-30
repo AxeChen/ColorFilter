@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.mg.axe.colorfilter.constant.ColorMatrixValue;
 import com.mg.axe.colorfilter.filter.FilterImageShowView;
 import com.mg.axe.colorfilter.filter.FilterImageView;
 import com.mg.axe.colorfilter.utils.Utils;
@@ -32,7 +33,7 @@ public class ImageActivity extends AppCompatActivity {
 
     public static final String TAG_STRING_IMAGE_URL = "tagStringImageUrl";
 
-    private FilterImageShowView imageView;
+    private FilterImageView imageView;
     private Button btn;
     private Button maskBtn;
     private Button adjustBtn;
@@ -46,7 +47,7 @@ public class ImageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_image);
         imageUrl = getIntent().getStringExtra(TAG_STRING_IMAGE_URL);
 
-        imageView = (FilterImageShowView) findViewById(R.id.fImage);
+        imageView = (FilterImageView) findViewById(R.id.fImage);
         btn = (Button) findViewById(R.id.btnMatrx);
         setMatrix = (Button) findViewById(R.id.btnSetMatrix);
         adjustBtn = (Button) findViewById(R.id.btnAdjust);
@@ -59,6 +60,7 @@ public class ImageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ImageActivity.this, ColorMatrixSetActivity.class);
+                intent.putExtra(ImageActivity.TAG_STRING_IMAGE_URL, imageUrl);
                 startActivity(intent);
             }
         });
@@ -67,6 +69,7 @@ public class ImageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ImageActivity.this, AdjustActivity.class);
+                intent.putExtra(ImageActivity.TAG_STRING_IMAGE_URL, imageUrl);
                 startActivity(intent);
             }
         });
@@ -74,6 +77,7 @@ public class ImageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ImageActivity.this, MaskActivity.class);
+                intent.putExtra(ImageActivity.TAG_STRING_IMAGE_URL, imageUrl);
                 startActivity(intent);
             }
         });
@@ -81,6 +85,7 @@ public class ImageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ImageActivity.this, MainActivity.class);
+                intent.putExtra(ImageActivity.TAG_STRING_IMAGE_URL, imageUrl);
                 startActivityForResult(intent, 1000);
             }
         });
@@ -89,6 +94,7 @@ public class ImageActivity extends AppCompatActivity {
     private void setImageBitmap() {
         Bitmap bitmap = Utils.readBitmap(imageUrl, 2);
         imageView.setImageBitmap(bitmap);
+        imageView.setFloat(ColorMatrixValue.src);
     }
 
 
