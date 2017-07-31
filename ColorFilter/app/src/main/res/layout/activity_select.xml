@@ -1,10 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg"
+    android:gravity="bottom|center_horizontal"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btnSelectFromXiangce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/album_shape"
+        android:text="相册"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btnTakePhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/btnSelectFromXiangce"
+        android:background="@drawable/camera_shape"
+        android:text="拍照"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
 
 
-
-
-
-</LinearLayout>
+</RelativeLayout>

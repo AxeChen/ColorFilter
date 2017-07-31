@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.EmbossMaskFilter;
 import android.graphics.Paint;
 import android.graphics.RectF;
@@ -31,7 +32,7 @@ public class MaskView extends FilterView {
     protected int scaleWidth = 0;
     protected int scaleHeight = 0;
 
-    private BlurMaskFilter blurMaskFilter;
+
 
     public MaskView(Context context) {
         this(context, null);
@@ -52,8 +53,11 @@ public class MaskView extends FilterView {
 
     private void initPaint() {
         paint = new Paint();
+        paint.setColor(Color.WHITE);
         paint.setAntiAlias(true);
     }
+
+    private BlurMaskFilter blurMaskFilter;
 
     public void setMaskWidth(int maskWidth) {
         if (maskWidth == 0) {
@@ -68,7 +72,7 @@ public class MaskView extends FilterView {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         if (bitmap != null) {
-            setMeasuredDimension(scaleWidth, scaleHeight);
+            setMeasuredDimension((int) (scaleWidth - 0.1), (int) (scaleHeight - 0.1));
             scaleBitmap();
             invalidate();
         }
@@ -125,14 +129,15 @@ public class MaskView extends FilterView {
             scaleWidth = screenWidth;
         } else if (bWidth < bHeight) {
             //最大高为屏幕的 5/6
-            if (bHeight > screenHeight) {
-                scale = bHeight * 1f / scaleHeight * 1f;
+            int maxHeight = screenHeight * 5 / 6;
+            if (bHeight > maxHeight) {
+                scale = bHeight * 1f / maxHeight * 1f;
                 scaleWidth = (int) (bWidth * 1f / scale);
             } else {
-                scale = scaleHeight * 1f / bHeight;
+                scale = maxHeight * 1f / bHeight;
                 scaleWidth = (int) (bWidth * 1f * scale);
             }
-            scaleHeight = screenHeight;
+            scaleHeight = screenHeight * 5 / 6;
         } else {
             scaleWidth = screenWidth;
             scaleHeight = screenWidth;

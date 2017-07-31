@@ -1,42 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
 
-    <com.mg.axe.colorfilter.filter.FilterImageShowView
+    <include layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:id="@+id/bottomItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnMatrx"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/main_pink_button"
+            android:text="加滤镜"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btnMask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:layout_toRightOf="@+id/btnMatrx"
+            android:layout_weight="1"
+            android:background="@drawable/main_blue_button2"
+            android:text="虚化边框"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btnAdjust"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:layout_toRightOf="@+id/btnMask"
+            android:layout_weight="1"
+            android:background="@drawable/main_blue_button"
+            android:text="调整"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btnSetMatrix"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:layout_toRightOf="@+id/btnAdjust"
+            android:layout_weight="1"
+            android:background="@drawable/main_blue_button3"
+            android:text="调整矩阵"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+
+    </LinearLayout>
+
+    <com.mg.axe.colorfilter.filter.FilterImageView
         android:id="@+id/fImage"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/btnMatrx"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="加滤镜" />
+        android:layout_above="@+id/bottomItem"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true" />
 
-    <Button
-        android:id="@+id/btnMask"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/btnMatrx"
-        android:text="加模糊" />
-
-    <Button
-        android:id="@+id/btnAdjust"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/btnMask"
-        android:text="调整" />
-
-    <Button
-        android:id="@+id/btnSetMatrix"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/btnAdjust"
-        android:text="调整矩阵" />
 
 </RelativeLayout>

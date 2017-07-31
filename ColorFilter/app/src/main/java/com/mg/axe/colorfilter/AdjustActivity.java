@@ -8,6 +8,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.SeekBar;
 
+import com.mg.axe.colorfilter.constant.ColorMatrixValue;
+import com.mg.axe.colorfilter.filter.FilterImageView;
+
 import java.io.File;
 
 /**
@@ -19,7 +22,7 @@ import java.io.File;
 public class AdjustActivity extends AppCompatActivity {
 
     String path = Environment.getExternalStorageDirectory().getPath() + File.separator + "com.mg.axe.colorfilters" + File.separator;
-    private AdjustView adjustView;
+    private FilterImageView adjustView;
     private SeekBar lightSeekBar;
     private SeekBar saturationSeekBar;
 
@@ -27,7 +30,7 @@ public class AdjustActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adjust);
-        adjustView = (AdjustView) findViewById(R.id.adjustView);
+        adjustView = (FilterImageView) findViewById(R.id.adjustView);
         lightSeekBar = (SeekBar) findViewById(R.id.sbLight);
         lightSeekBar.setProgress(50);
         saturationSeekBar = (SeekBar) findViewById(R.id.sbSaturation);
@@ -41,7 +44,7 @@ public class AdjustActivity extends AppCompatActivity {
         lightSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                float value = progress/50f;
+                float value = progress / 50f;
                 adjustView.changeLight(value);
             }
 
@@ -59,7 +62,7 @@ public class AdjustActivity extends AppCompatActivity {
         saturationSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                float value = progress/50f;
+                float value = progress / 50f;
                 adjustView.changeSaturation(value);
             }
 
@@ -78,5 +81,6 @@ public class AdjustActivity extends AppCompatActivity {
     public void setImage() {
         Bitmap bitmap = BitmapFactory.decodeFile(path + "cachetest.jpg");
         adjustView.setImageBitmap(bitmap);
+        adjustView.setFloat(ColorMatrixValue.src);
     }
 }

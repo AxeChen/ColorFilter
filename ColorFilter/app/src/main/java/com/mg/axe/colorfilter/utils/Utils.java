@@ -51,4 +51,40 @@ public class Utils {
             return null;
         }
     }
+
+    /**
+     * 读取图片，按照缩放比保持长宽比例返回bitmap对象
+     * <p>
+     *
+     * @param path  图片全路径
+     * @param scale 缩放比例(1到10, 为2时，长和宽均缩放至原来的2分之1，为3时缩放至3分之1，以此类推)
+     * @return Bitmap
+     */
+    public synchronized static Bitmap readBitmap(String path, int scale) {
+        try {
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            // 设置缩放比例
+            options.inSampleSize = scale;
+
+            // 设置为false,解析Bitmap对象加入到内存中
+            options.inJustDecodeBounds = false;
+
+            // 设置内存不足时，比bitmap对象可以被回收
+            options.inPurgeable = true;
+            options.inInputShareable = true;
+
+            options.inPreferredConfig = Bitmap.Config.RGB_565;
+
+            Bitmap bitmap = BitmapFactory.decodeFile(path, options);
+
+            // 判断一下图片是否旋转，如果旋转了，手动再转正
+            // int degree = ImageManager.getExifOrientation(path);
+            // if (degree != 0) {
+            // bitmap = ImageManager.rotaingImageView(degree, bitmap);
+            // }
+            return bitmap;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

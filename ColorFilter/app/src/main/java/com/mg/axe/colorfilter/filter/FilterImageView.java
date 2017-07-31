@@ -2,6 +2,7 @@ package com.mg.axe.colorfilter.filter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
@@ -60,7 +61,7 @@ public class FilterImageView extends FilterView {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         if (bitmap != null) {
-            setMeasuredDimension(scaleWidth, scaleHeight);
+            setMeasuredDimension((int) (scaleWidth - 0.1), (int) (scaleHeight - 0.1));
             scaleBitmap();
             invalidate();
         }
@@ -73,6 +74,31 @@ public class FilterImageView extends FilterView {
         scaleBitmap();
     }
 
+    public static final int DRAW_TYPE_MATRIX = 0;
+    public static final int DRAW_TYPE_MASK = 1;
+
+    private int drawType = 0;
+
+    /**
+     * @param light 0f -2f
+     */
+    public void changeLight(float light) {
+        colorMatrix = new ColorMatrix();
+        colorMatrix.setScale(light, light, light, 1f);
+        colorMatrixColorFilter = new ColorMatrixColorFilter(colorMatrix);
+        invalidate();
+    }
+
+    /**
+     * @param saturaction 0f - 2f
+     */
+    public void changeSaturation(float saturaction) {
+        colorMatrix = new ColorMatrix();
+        colorMatrix.setSaturation(saturaction);
+        colorMatrixColorFilter = new ColorMatrixColorFilter(colorMatrix);
+        invalidate();
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         paint.reset();
@@ -80,7 +106,18 @@ public class FilterImageView extends FilterView {
         if (bitmap == null || colorMatrix == null) {
             return;
         }
-        paint.setColorFilter(colorMatrixColorFilter);
+        switch (drawType) {
+            case DRAW_TYPE_MATRIX:
+                if (colorMatrixColorFilter != null) {
+                    paint.setColorFilter(colorMatrixColorFilter);
+                }
+                break;
+            case DRAW_TYPE_MASK:
+                if (blurMaskFilter != null) {
+                    paint.setMaskFilter(blurMaskFilter);
+                }
+                break;
+        }
         canvas.drawBitmap(bitmap, null, rectF, paint);
         canvas.save();
     }
@@ -104,6 +141,19 @@ public class FilterImageView extends FilterView {
         invalidate();
     }
 
+
+    private BlurMaskFilter blurMaskFilter;
+
+    public void setMaskWidth(int maskWidth) {
+        drawType = DRAW_TYPE_MASK;
+        if (maskWidth == 0) {
+            blurMaskFilter = null;
+        } else {
+            blurMaskFilter = new BlurMaskFilter(maskWidth * 2, BlurMaskFilter.Blur.NORMAL);
+        }
+        invalidate();
+    }
+
     @Override
     public void scaleBitmap() {
         if (bitmap == null) {
@@ -124,14 +174,15 @@ public class FilterImageView extends FilterView {
             scaleWidth = screenWidth;
         } else if (bWidth < bHeight) {
             //最大高为屏幕的 5/6
-            if (bHeight > screenHeight) {
-                scale = bHeight * 1f / scaleHeight * 1f;
+            int maxHeight = screenHeight * 5 / 6;
+            if (bHeight > maxHeight) {
+                scale = bHeight * 1f / maxHeight * 1f;
                 scaleWidth = (int) (bWidth * 1f / scale);
             } else {
-                scale = scaleHeight * 1f / bHeight;
+                scale = maxHeight * 1f / bHeight;
                 scaleWidth = (int) (bWidth * 1f * scale);
             }
-            scaleHeight = screenHeight;
+            scaleHeight = screenHeight * 5 / 6;
         } else {
             scaleWidth = screenWidth;
             scaleHeight = screenWidth;
