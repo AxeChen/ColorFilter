@@ -27,6 +27,11 @@ public class FilterImageView extends FilterView {
     private Paint paint;
     private RectF rectF;
 
+    public static final int DRAW_TYPE_MATRIX = 0;
+    public static final int DRAW_TYPE_MASK = 1;
+
+    private int drawType = 0;
+
     private ColorMatrixColorFilter colorMatrixColorFilter;
     private ColorMatrix colorMatrix;
 
@@ -34,6 +39,7 @@ public class FilterImageView extends FilterView {
     private int screenHeight = 0;
     protected int scaleWidth = 0;
     protected int scaleHeight = 0;
+    private int maxHeight = 0;
 
     public FilterImageView(Context context) {
         this(context, null);
@@ -74,10 +80,9 @@ public class FilterImageView extends FilterView {
         scaleBitmap();
     }
 
-    public static final int DRAW_TYPE_MATRIX = 0;
-    public static final int DRAW_TYPE_MASK = 1;
-
-    private int drawType = 0;
+    public void setMaxHight(int maxHeight) {
+        this.maxHeight = maxHeight;
+    }
 
     /**
      * @param light 0f -2f
@@ -149,7 +154,7 @@ public class FilterImageView extends FilterView {
         if (maskWidth == 0) {
             blurMaskFilter = null;
         } else {
-            blurMaskFilter = new BlurMaskFilter(maskWidth * 2, BlurMaskFilter.Blur.NORMAL);
+            blurMaskFilter = new BlurMaskFilter(maskWidth * 2, BlurMaskFilter.Blur.INNER);
         }
         invalidate();
     }

@@ -33,7 +33,6 @@ public class MaskView extends FilterView {
     protected int scaleHeight = 0;
 
 
-
     public MaskView(Context context) {
         this(context, null);
     }
@@ -94,7 +93,6 @@ public class MaskView extends FilterView {
             paint.setMaskFilter(blurMaskFilter);
         }
 
-//        paint.setMaskFilter(new EmbossMaskFilter(new float[]{80,80,80},0.1f,80,9.0f));
         canvas.drawBitmap(bitmap, null, rectF, paint);
         canvas.save();
     }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.WindowManager;
 
 /**
@@ -86,5 +87,11 @@ public class Utils {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    //dp px
+    public static int dp2px(Context context, int dpval) {
+        context = context.getApplicationContext();
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpval, context.getResources().getDisplayMetrics());
     }
 }

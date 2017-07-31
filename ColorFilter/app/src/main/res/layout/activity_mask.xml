@@ -5,16 +5,12 @@
     android:background="#000000"
     android:orientation="vertical">
 
-    <com.mg.axe.colorfilter.filter.FilterImageView
-        android:id="@+id/maskView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="0.1px" />
+    <include layout="@layout/toolbar" />
 
     <LinearLayout
+        android:id="@+id/llAdjust"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
@@ -24,16 +20,25 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="模糊宽度：" />
+            android:text="模糊宽度："
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
 
         <SeekBar
-
             android:id="@+id/sbMask"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:max="100" />
-
     </LinearLayout>
+
+    <com.mg.axe.colorfilter.filter.FilterImageView
+        android:id="@+id/maskView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/llAdjust"
+        android:layout_below="@id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="0.1px" />
 
 
 </RelativeLayout>
