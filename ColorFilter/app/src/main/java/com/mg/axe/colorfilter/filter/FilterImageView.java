@@ -134,6 +134,11 @@ public class FilterImageView extends FilterView {
         Paint paint = new Paint();
         paint.setAntiAlias(true);
         paint.setColorFilter(colorMatrixColorFilter);
+        if (drawType == DRAW_TYPE_MASK) {
+            if (blurMaskFilter != null) {
+                paint.setMaskFilter(blurMaskFilter);
+            }
+        }
         canvas.drawBitmap(bitmap, 0, 0, paint);//绘制的图片和之前的一模一样 
         return bitmapAltered;
     }
@@ -154,7 +159,7 @@ public class FilterImageView extends FilterView {
         if (maskWidth == 0) {
             blurMaskFilter = null;
         } else {
-            blurMaskFilter = new BlurMaskFilter(maskWidth * 2, BlurMaskFilter.Blur.INNER);
+            blurMaskFilter = new BlurMaskFilter(maskWidth * 2, BlurMaskFilter.Blur.NORMAL);
         }
         invalidate();
     }

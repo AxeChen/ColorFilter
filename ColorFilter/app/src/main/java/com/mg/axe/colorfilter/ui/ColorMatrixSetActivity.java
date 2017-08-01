@@ -1,18 +1,21 @@
-package com.mg.axe.colorfilter;
+package com.mg.axe.colorfilter.ui;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
+import com.mg.axe.colorfilter.R;
+import com.mg.axe.colorfilter.constant.ColorMatrixValue;
 import com.mg.axe.colorfilter.filter.FilterImageView;
+import com.mg.axe.colorfilter.utils.Utils;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,6 +76,12 @@ public class ColorMatrixSetActivity extends BaseActivity {
     Button btnRest;
     @BindView(R.id.btnApply)
     Button btnApply;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.llMatrix)
+    LinearLayout llMatrix;
+
+    private ActionBar bar;
 
     private List<EditText> editTexts = new ArrayList<>();
 
@@ -90,16 +99,43 @@ public class ColorMatrixSetActivity extends BaseActivity {
 
     private float[] colorMatrixValue = new float[20];
 
+
+    private void initActionBar() {
+        setSupportActionBar(toolbar);
+        bar = getSupportActionBar();
+        if (bar != null) {
+            bar.setHomeButtonEnabled(true);
+            bar.setDisplayHomeAsUpEnabled(true);
+            bar.setTitle("自定义矩阵值");
+        }
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matrix_adjust);
+        imageUrl = getIntent().getStringExtra(TAG_STRING_IMAGE_URL);
         ButterKnife.bind(this);
-        setImage();
-        adjustView.setFloat(floats);
+        setFilterImage(adjustView);
+
         setDefaultValue();
         initEditTextList();
         initListener();
+        initActionBar();
+        setImageBitmap();
+    }
+
+    private String imageUrl;
+
+    private void setImageBitmap() {
+        Bitmap bitmap = null;
+        if (alreadyChange) {
+            bitmap = BitmapFactory.decodeFile(imageUrl);
+        } else {
+            bitmap = Utils.readBitmap(imageUrl, 2);
+        }
+        adjustView.setImageBitmap(bitmap);
+        adjustView.setFloat(ColorMatrixValue.src);
     }
 
     private void initEditTextList() {
@@ -198,13 +234,5 @@ public class ColorMatrixSetActivity extends BaseActivity {
         et.setText(t + "");
 
     }
-
-    String path = Environment.getExternalStorageDirectory().getPath() + File.separator + "com.mg.axe.colorfilters" + File.separator;
-
-    public void setImage() {
-        Bitmap bitmap = BitmapFactory.decodeFile(path + "cachetest.jpg");
-        adjustView.setImageBitmap(bitmap);
-    }
-
 
 }

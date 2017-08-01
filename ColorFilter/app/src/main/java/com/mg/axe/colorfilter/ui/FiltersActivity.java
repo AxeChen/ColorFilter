@@ -1,31 +1,25 @@
-package com.mg.axe.colorfilter;
+package com.mg.axe.colorfilter.ui;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.mg.axe.colorfilter.R;
 import com.mg.axe.colorfilter.constant.ColorMatrixValue;
-import com.mg.axe.colorfilter.filter.FilterBean;
+import com.mg.axe.colorfilter.bean.FilterBean;
 import com.mg.axe.colorfilter.filter.FilterImageView;
 import com.mg.axe.colorfilter.filter.FilterItemView;
 import com.mg.axe.colorfilter.utils.Utils;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,13 +31,10 @@ public class FiltersActivity extends BaseActivity {
     public List<FilterBean> beenList = new ArrayList<>();
     public Bitmap bitmap;
     public Bitmap itemBitmap;
-    public Button okBtn;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.fImage)
     FilterImageView fImage;
-    @BindView(R.id.btnOk)
-    Button btnOk;
     @BindView(R.id.matrixSelect)
     RecyclerView matrixSelect;
 
@@ -54,14 +45,10 @@ public class FiltersActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
-
+        setFilterImage(fImage);
         initActionBar();
 
         imageUrl = getIntent().getStringExtra(TAG_STRING_IMAGE_URL);
-        fImage = (FilterImageView) findViewById(R.id.fImage);
-        matrixSelect = (RecyclerView) findViewById(R.id.matrixSelect);
-        okBtn = (Button) findViewById(R.id.btnOk);
         itemBitmap = Utils.readBitmap(this, R.mipmap.damimi, 4);
         fImage.setImageBitmap(bitmap);
         fImage.setFloat(ColorMatrixValue.src);
@@ -69,21 +56,12 @@ public class FiltersActivity extends BaseActivity {
         matrixSelect.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         matrixSelect.setAdapter(new ColorFilterAdapter());
 
-        okBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveBitmapFile(fImage.getChangeBitmap());
-                Intent intent = new Intent();
-                setResult(RESULT_OK, intent);
-                finish();
-            }
-        });
-
         setImageBitmap();
         setItemBitmap();
     }
 
     private void initActionBar() {
+        setSupportActionBar(toolbar);
         bar = getSupportActionBar();
         if (bar != null) {
             bar.setHomeButtonEnabled(true);
@@ -92,45 +70,21 @@ public class FiltersActivity extends BaseActivity {
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     private String imageUrl;
 
     private void setImageBitmap() {
-        Bitmap bitmap = Utils.readBitmap(imageUrl, 2);
+        Bitmap bitmap = null;
+        if (alreadyChange) {
+            bitmap = BitmapFactory.decodeFile(imageUrl);
+        } else {
+            bitmap = Utils.readBitmap(imageUrl, 2);
+        }
         fImage.setImageBitmap(bitmap);
         fImage.setFloat(ColorMatrixValue.src);
     }
 
     private void setItemBitmap() {
         itemBitmap = Utils.readBitmap(imageUrl, 5);
-    }
-
-    public void saveBitmapFile(Bitmap bitmap) {
-        String path = Environment.getExternalStorageDirectory().getPath() + File.separator + "com.mg.axe.colorfilters" + File.separator;
-
-        try {
-            File file = new File(path + "cachetest.jpg");//将要保存图片的路径
-            if (!file.exists()) {
-                file.getParentFile().mkdirs();
-                file.createNewFile();
-            }
-            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-            bos.flush();
-            bos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void getFilterDatas() {

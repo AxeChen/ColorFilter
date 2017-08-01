@@ -13,22 +13,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FiltersActivity">
+        <activity android:name=".ui.FiltersActivity">
         </activity>
-        <activity android:name=".MaskActivity">
+        <activity android:name=".ui.MaskActivity">
         </activity>
-        <activity android:name=".AdjustActivity">
+        <activity android:name=".ui.AdjustActivity">
         </activity>
-        <activity android:name=".ColorMatrixSetActivity">
+        <activity android:name=".ui.ColorMatrixSetActivity">
         </activity>
-        <activity android:name=".SelectImageActivity">
+        <activity android:name=".ui.SelectImageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ImageActivity">
+        <activity android:name=".ui.ImageActivity">
 
         </activity>
     </application>

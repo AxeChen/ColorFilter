@@ -4,14 +4,9 @@
     android:layout_height="match_parent"
     android:background="#000000">
 
-    <include layout="@layout/toolbar" />
-
-    <Button
-        android:id="@+id/btnOk"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="确定" />
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/matrixSelect"
@@ -24,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/matrixSelect"
-        android:layout_below="@+id/toolbar"
+        android:layout_below="@id/toolbar"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
