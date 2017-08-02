@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="1dp"
             android:layout_weight="1"
-            android:background="@drawable/main_pink_button"
+            android:background="@drawable/main_button"
             android:text="加滤镜"
             android:textColor="@android:color/white"
             android:textSize="16sp" />
@@ -33,7 +33,7 @@
             android:layout_margin="1dp"
             android:layout_toRightOf="@+id/btnMatrx"
             android:layout_weight="1"
-            android:background="@drawable/main_blue_button2"
+            android:background="@drawable/main_button"
             android:text="虚化边框"
             android:textColor="@android:color/white"
             android:textSize="16sp" />
@@ -45,7 +45,7 @@
             android:layout_margin="1dp"
             android:layout_toRightOf="@+id/btnMask"
             android:layout_weight="1"
-            android:background="@drawable/main_blue_button"
+            android:background="@drawable/main_button"
             android:text="调整"
             android:textColor="@android:color/white"
             android:textSize="16sp" />
@@ -57,7 +57,7 @@
             android:layout_margin="1dp"
             android:layout_toRightOf="@+id/btnAdjust"
             android:layout_weight="1"
-            android:background="@drawable/main_blue_button3"
+            android:background="@drawable/main_button"
             android:text="调整矩阵"
             android:textColor="@android:color/white"
             android:textSize="16sp" />

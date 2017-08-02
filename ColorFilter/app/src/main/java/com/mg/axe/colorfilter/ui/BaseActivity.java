@@ -35,7 +35,7 @@ public class BaseActivity extends AppCompatActivity {
     private static int PERMISSION_CAMERA = 100;
 
     //是否已经改变了图片,如果已经改变了图片就无需再压缩展示
-    protected boolean alreadyChange = false;
+    protected static  boolean alreadyChange = false;
 
     protected FilterImageView filterImage;
 

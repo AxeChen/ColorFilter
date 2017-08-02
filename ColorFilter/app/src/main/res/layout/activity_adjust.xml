@@ -5,7 +5,9 @@
     android:background="@android:color/black"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar" />
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
 
 
     <RelativeLayout
@@ -71,7 +73,7 @@
         android:id="@+id/adjustView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/rlAdjust"
+        android:layout_below="@id/toolbar"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

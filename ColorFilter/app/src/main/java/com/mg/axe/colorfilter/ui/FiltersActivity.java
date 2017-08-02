@@ -105,12 +105,14 @@ public class FiltersActivity extends BaseActivity {
         beenList.add(new FilterBean("高亮", ColorMatrixValue.highLight));
         beenList.add(new FilterBean("反相", ColorMatrixValue.removeColor));
         beenList.add(new FilterBean("红色加强", ColorMatrixValue.red));
-        beenList.add(new FilterBean("去掉红色", ColorMatrixValue.removeRed));
+        beenList.add(new FilterBean("青色", ColorMatrixValue.removeRed));
         beenList.add(new FilterBean("绿色加强", ColorMatrixValue.green));
-        beenList.add(new FilterBean("去掉绿色", ColorMatrixValue.removeGreen));
+        beenList.add(new FilterBean("洋红", ColorMatrixValue.removeGreen));
         beenList.add(new FilterBean("蓝色加强", ColorMatrixValue.blue));
-        beenList.add(new FilterBean("去掉蓝色", ColorMatrixValue.removeBlue));
+        beenList.add(new FilterBean("黄色", ColorMatrixValue.removeBlue));
     }
+
+    private int markIndex = 0;
 
     public class ColorFilterAdapter extends RecyclerView.Adapter {
 
@@ -134,6 +136,11 @@ public class FiltersActivity extends BaseActivity {
             itemViewHolder.itemImg.setImageBitmap(itemBitmap);
             itemViewHolder.itemImg.setFloat(filterBean.getFilterFloats());
             itemViewHolder.itemText.setText(filterBean.getName());
+            if (position == markIndex) {
+                itemViewHolder.frameLayout.setBackgroundResource(R.drawable.filter_item);
+            } else {
+                itemViewHolder.frameLayout.setBackgroundResource(0);
+            }
         }
 
         public class ItemViewHolder extends RecyclerView.ViewHolder {
@@ -142,7 +149,7 @@ public class FiltersActivity extends BaseActivity {
             private TextView itemText;
             private RelativeLayout frameLayout;
 
-            public ItemViewHolder(View itemView) {
+            public ItemViewHolder(final View itemView) {
                 super(itemView);
                 itemImg = (FilterItemView) itemView.findViewById(R.id.itemImg);
                 frameLayout = (RelativeLayout) itemView.findViewById(R.id.itemContent);
@@ -154,6 +161,9 @@ public class FiltersActivity extends BaseActivity {
                         if (index >= 0) {
                             FilterBean bean = beenList.get(index);
                             fImage.setFloat(bean.getFilterFloats());
+                            itemView.setBackgroundResource(R.drawable.filter_item);
+                            markIndex = index;
+                            notifyDataSetChanged();
                         }
                     }
                 });

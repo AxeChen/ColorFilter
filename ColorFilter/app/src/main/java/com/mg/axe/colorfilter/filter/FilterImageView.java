@@ -130,7 +130,7 @@ public class FilterImageView extends FilterView {
     @Override
     public Bitmap getChangeBitmap() {
         Bitmap bitmapAltered = Bitmap.createBitmap((int) rectF.right, (int) rectF.bottom, bitmap.getConfig());
-        Canvas canvas = new Canvas(bitmapAltered);//bitmap提供了画布，只在此提供了大小尺寸，偏移后并未有背景显示出来 
+        Canvas canvas = new Canvas(bitmapAltered);
         Paint paint = new Paint();
         paint.setAntiAlias(true);
         paint.setColorFilter(colorMatrixColorFilter);
@@ -139,7 +139,7 @@ public class FilterImageView extends FilterView {
                 paint.setMaskFilter(blurMaskFilter);
             }
         }
-        canvas.drawBitmap(bitmap, null, rectF, paint);//绘制的图片和之前的一模一样 
+        canvas.drawBitmap(bitmap, null, rectF, paint);
         return bitmapAltered;
     }
 

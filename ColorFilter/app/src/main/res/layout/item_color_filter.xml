@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/itemContent"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="5dp">
+    android:layout_width="60dp"
+    android:layout_height="wrap_content">
 
     <com.mg.axe.colorfilter.filter.FilterItemView
         android:id="@+id/itemImg"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp" />
 
     <TextView
         android:id="@+id/itemName"

@@ -36,9 +36,7 @@ public abstract class FilterView extends android.support.v7.widget.AppCompatImag
         return null;
     }
 
-    /**
-     *
-     */
+
     @Override
     public void scaleBitmap() {
     }
