@@ -7,8 +7,8 @@
 
     <com.mg.axe.colorfilter.filter.FilterItemView
         android:id="@+id/itemImg"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -20,6 +20,6 @@
         android:layout_marginTop="5dp"
         android:text="原图"
         android:textColor="#ffffff"
-        android:textSize="14sp" />
+        android:textSize="12sp" />
 
 </RelativeLayout>

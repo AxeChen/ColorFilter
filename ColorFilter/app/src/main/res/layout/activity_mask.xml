@@ -5,7 +5,9 @@
     android:background="#000000"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar" />
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
 
     <LinearLayout
         android:id="@+id/llAdjust"
@@ -35,7 +37,6 @@
         android:id="@+id/maskView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/llAdjust"
         android:layout_below="@id/toolbar"
         android:layout_centerHorizontal="true"
         android:layout_margin="0.1px" />

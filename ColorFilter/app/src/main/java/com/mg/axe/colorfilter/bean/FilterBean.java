@@ -1,4 +1,4 @@
-package com.mg.axe.colorfilter.filter;
+package com.mg.axe.colorfilter.bean;
 
 /**
  * @Author Zaifeng

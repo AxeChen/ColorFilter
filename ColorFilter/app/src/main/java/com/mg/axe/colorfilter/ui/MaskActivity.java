@@ -1,6 +1,7 @@
-package com.mg.axe.colorfilter;
+package com.mg.axe.colorfilter.ui;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -9,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 
+import com.mg.axe.colorfilter.R;
 import com.mg.axe.colorfilter.constant.ColorMatrixValue;
 import com.mg.axe.colorfilter.filter.FilterImageView;
 import com.mg.axe.colorfilter.utils.Utils;
@@ -42,6 +44,7 @@ public class MaskActivity extends BaseActivity {
         imageUrl = getIntent().getStringExtra(TAG_STRING_IMAGE_URL);
         setContentView(R.layout.activity_mask);
         ButterKnife.bind(this);
+        setFilterImage(maskView);
         initActionBar();
         setImageBitmap();
         initListener();
@@ -88,10 +91,13 @@ public class MaskActivity extends BaseActivity {
     }
 
     private void setImageBitmap() {
-        Bitmap bitmap = Utils.readBitmap(imageUrl, 2);
+        Bitmap bitmap = null;
+        if(alreadyChange){
+            bitmap = BitmapFactory.decodeFile(imageUrl);
+        }else {
+            bitmap = Utils.readBitmap(imageUrl, 2);
+        }
         maskView.setImageBitmap(bitmap);
         maskView.setFloat(ColorMatrixValue.src);
     }
-
-
 }

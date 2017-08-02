@@ -78,11 +78,6 @@ public class Utils {
 
             Bitmap bitmap = BitmapFactory.decodeFile(path, options);
 
-            // 判断一下图片是否旋转，如果旋转了，手动再转正
-            // int degree = ImageManager.getExifOrientation(path);
-            // if (degree != 0) {
-            // bitmap = ImageManager.rotaingImageView(degree, bitmap);
-            // }
             return bitmap;
         } catch (Exception e) {
             return null;

@@ -4,7 +4,9 @@
     android:layout_height="match_parent"
     android:background="@android:color/black">
 
-    <include layout="@layout/toolbar" />
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
 
     <LinearLayout
         android:id="@+id/bottomItem"
@@ -67,8 +69,7 @@
         android:id="@+id/fImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/bottomItem"
-        android:layout_below="@+id/toolbar"
+        android:layout_below="@id/toolbar"
         android:layout_centerHorizontal="true" />
 
 

@@ -1,19 +1,15 @@
-package com.mg.axe.colorfilter;
+package com.mg.axe.colorfilter.ui;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.mg.axe.colorfilter.R;
 import com.mg.axe.colorfilter.utils.FileUtils;
 
 import java.io.File;
@@ -30,8 +26,8 @@ import butterknife.ButterKnife;
 
 public class SelectImageActivity extends BaseActivity {
 
-    private static int REQUEST_CAMERA = 1;// 请求缩略图信号标识
-    private static int REQUEST_ALBUM = 2;// 请求原图信号标识
+    private static final int REQUEST_CAMERA = 1;// 请求缩略图信号标识
+    private static final int REQUEST_ALBUM = 2;// 请求原图信号标识
 
     @BindView(R.id.btnSelectFromXiangce)
     Button btnSelectFromXiangce;
@@ -70,7 +66,7 @@ public class SelectImageActivity extends BaseActivity {
 
     private void takePhoto() {
         Intent intent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        File file = new File(FileUtils.TEMPFILE);
+        File file = new File(FileUtils.TEMP_FILE);
         if (!file.exists()) {
             file.getParentFile().mkdirs();
             try {
@@ -94,19 +90,24 @@ public class SelectImageActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_ALBUM) {
-            Uri selectedImage = data.getData();
-            String[] filePathColumns = {MediaStore.Images.Media.DATA};
-            Cursor c = getContentResolver().query(selectedImage, filePathColumns, null, null, null);
-            if (c != null) {
-                c.moveToFirst();
-                int columnIndex = c.getColumnIndex(filePathColumns[0]);
-                String imagePath = c.getString(columnIndex);
-                intentImageActivity(imagePath);
-                c.close();
+            if (resultCode == RESULT_OK) {
+                Uri selectedImage = data.getData();
+                String[] filePathColumns = {MediaStore.Images.Media.DATA};
+                Cursor c = getContentResolver().query(selectedImage, filePathColumns, null, null, null);
+                if (c != null) {
+                    c.moveToFirst();
+                    int columnIndex = c.getColumnIndex(filePathColumns[0]);
+                    String imagePath = c.getString(columnIndex);
+                    intentImageActivity(imagePath);
+                    c.close();
+                }
             }
+
         } else if (requestCode == REQUEST_CAMERA) {
-            //拍照
-            intentImageActivity(FileUtils.TEMPFILE);
+            if (resultCode == RESULT_OK) {
+                //拍照
+                intentImageActivity(FileUtils.TEMP_FILE);
+            }
         }
     }
 

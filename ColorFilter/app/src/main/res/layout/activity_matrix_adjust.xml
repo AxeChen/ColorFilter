@@ -2,14 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/black"
     android:orientation="vertical">
 
-    <com.mg.axe.colorfilter.filter.FilterImageView
-        android:id="@+id/adjustView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <include layout="@layout/toolbar" />
+
 
     <LinearLayout
+        android:id="@+id/llMatrix"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -26,12 +26,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="f" />
+                android:text="f"
+                android:textColor="@android:color/white" />
 
             <EditText
                 android:id="@+id/b"
@@ -39,12 +41,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="f" />
+                android:text="f"
+                android:textColor="@android:color/white" />
 
             <EditText
                 android:id="@+id/c"
@@ -52,12 +56,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="f" />
+                android:text="f"
+                android:textColor="@android:color/white" />
 
             <EditText
                 android:id="@+id/d"
@@ -65,12 +71,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="f" />
+                android:text="f"
+                android:textColor="@android:color/white" />
 
             <EditText
                 android:id="@+id/e"
@@ -78,12 +86,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="f" />
+                android:text="f"
+                android:textColor="@android:color/white" />
 
 
         </LinearLayout>
@@ -99,12 +109,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="f" />
+                android:text="f"
+                android:textColor="@android:color/white" />
 
 
             <EditText
@@ -113,12 +125,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="f" />
+                android:text="f"
+                android:textColor="@android:color/white" />
 
             <EditText
                 android:id="@+id/h"
@@ -126,12 +140,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="f" />
+                android:text="f"
+                android:textColor="@android:color/white" />
 
             <EditText
                 android:id="@+id/i"
@@ -139,12 +155,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="f" />
+                android:text="f"
+                android:textColor="@android:color/white" />
 
             <EditText
                 android:id="@+id/j"
@@ -152,12 +170,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="f" />
+                android:text="f"
+                android:textColor="@android:color/white" />
 
 
         </LinearLayout>
@@ -173,12 +193,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="f" />
+                android:text="f"
+                android:textColor="@android:color/white" />
 
             <EditText
                 android:id="@+id/l"
@@ -186,12 +208,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="f" />
+                android:text="f"
+                android:textColor="@android:color/white" />
 
             <EditText
                 android:id="@+id/m"
@@ -199,12 +223,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="f" />
+                android:text="f"
+                android:textColor="@android:color/white" />
 
             <EditText
                 android:id="@+id/n"
@@ -212,12 +238,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="f" />
+                android:text="f"
+                android:textColor="@android:color/white" />
 
             <EditText
                 android:id="@+id/o"
@@ -225,12 +253,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="f" />
+                android:text="f"
+                android:textColor="@android:color/white" />
 
 
         </LinearLayout>
@@ -246,12 +276,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="f" />
+                android:text="f"
+                android:textColor="@android:color/white" />
 
             <EditText
                 android:id="@+id/q"
@@ -259,12 +291,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="f" />
+                android:text="f"
+                android:textColor="@android:color/white" />
 
             <EditText
                 android:id="@+id/r"
@@ -272,12 +306,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="f" />
+                android:text="f"
+                android:textColor="@android:color/white" />
 
             <EditText
                 android:id="@+id/s"
@@ -285,12 +321,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="f" />
+                android:text="f"
+                android:textColor="@android:color/white" />
 
             <EditText
                 android:id="@+id/t"
@@ -298,12 +336,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="f" />
+                android:text="f"
+                android:textColor="@android:color/white" />
 
         </LinearLayout>
 
@@ -317,18 +357,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/main_blue_button"
                 android:gravity="center"
-                android:text="重置" />
+                android:text="重置"
+                android:textColor="@android:color/white" />
 
             <Button
                 android:id="@+id/btnApply"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/main_blue_button"
                 android:gravity="center"
-                android:text="应用" />
+                android:text="应用"
+                android:textColor="@android:color/white" />
         </LinearLayout>
 
     </LinearLayout>
+
+    <com.mg.axe.colorfilter.filter.FilterImageView
+        android:id="@+id/adjustView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/llMatrix"
+        android:layout_below="@+id/toolbar" />
 
 </RelativeLayout>
