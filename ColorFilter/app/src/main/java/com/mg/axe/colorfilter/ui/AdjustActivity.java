@@ -3,7 +3,6 @@ package com.mg.axe.colorfilter.ui;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -15,8 +14,6 @@ import com.mg.axe.colorfilter.R;
 import com.mg.axe.colorfilter.constant.ColorMatrixValue;
 import com.mg.axe.colorfilter.filter.FilterImageView;
 import com.mg.axe.colorfilter.utils.Utils;
-
-import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
