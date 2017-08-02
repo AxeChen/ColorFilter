@@ -6,14 +6,11 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
 
 import com.mg.axe.colorfilter.R;
 import com.mg.axe.colorfilter.constant.ColorMatrixValue;
@@ -82,8 +79,10 @@ public class ImageActivity extends BaseActivity {
         }
     }
 
+    private Bitmap bitmap;
+
     private void setImageBitmap(int scale) {
-        Bitmap bitmap = Utils.readBitmap(imageUrl, scale);
+        bitmap = Utils.readBitmap(imageUrl, scale);
         fImage.setImageBitmap(bitmap);
         fImage.setFloat(ColorMatrixValue.src);
     }
@@ -112,14 +111,22 @@ public class ImageActivity extends BaseActivity {
                 if (filterImage == null) {
                     return false;
                 }
-                saveBitmapFile(filterImage.getChangeBitmap(), FileUtils.SAVEFILE);
+                String url = FileUtils.SAVE_FILE + System.currentTimeMillis() + ".jpg";
+                saveBitmapFile(filterImage.getChangeBitmap(), url);
+                deleteTemp();
+
                 Intent intent = new Intent(ImageActivity.this, SaveActivity.class);
+                intent.putExtra(TAG_STRING_IMAGE_URL, url);
                 startActivity(intent);
                 finish();
                 return true;
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void deleteTemp() {
+        FileUtils.deleteFolderFile(FileUtils.TEMP_FILE, true);
     }
 
     @Override
@@ -131,10 +138,21 @@ public class ImageActivity extends BaseActivity {
 
                 alreadyChange = true;
                 imageUrl = url;
+                fImage.setImageBitmap(null);
                 //这里不需要再去压缩图片
-                Bitmap bitmap = BitmapFactory.decodeFile(imageUrl);
+                bitmap = BitmapFactory.decodeFile(imageUrl);
                 fImage.setImageBitmap(bitmap);
             }
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            bitmap.recycle();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

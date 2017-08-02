@@ -30,6 +30,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public static final int MENU_SAVE = 2;
     public static final int MENU_COMPLETE = 3;
+    public static final int MENU_SHARE = 4;
 
     private static int PERMISSION_CAMERA = 100;
 
@@ -66,7 +67,7 @@ public class BaseActivity extends AppCompatActivity {
                 }
                 saveBitmapFile(filterImage.getChangeBitmap());
                 Intent intent = new Intent();
-                intent.putExtra("imageUrl", FileUtils.TEMPFILE);
+                intent.putExtra("imageUrl", FileUtils.TEMP_FILE);
                 setResult(RESULT_OK, intent);
                 finish();
                 return true;
@@ -76,10 +77,10 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void saveBitmapFile(Bitmap bitmap) {
-        saveBitmapFile(bitmap,FileUtils.TEMPFILE);
+        saveBitmapFile(bitmap, FileUtils.TEMP_FILE);
     }
 
-    public void saveBitmapFile(Bitmap bitmap,String url) {
+    public void saveBitmapFile(Bitmap bitmap, String url) {
         try {
             File file = new File(url);//将要保存图片的路径
             if (!file.exists()) {
@@ -90,6 +91,7 @@ public class BaseActivity extends AppCompatActivity {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
             bos.flush();
             bos.close();
+            bitmap.recycle();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -49,6 +49,7 @@ public class AdjustActivity extends BaseActivity {
         setContentView(R.layout.activity_adjust);
         imageUrl = getIntent().getStringExtra(TAG_STRING_IMAGE_URL);
         ButterKnife.bind(this);
+        setFilterImage(adjustView);
         sbLight.setProgress(50);
         sbSaturation = (SeekBar) findViewById(R.id.sbSaturation);
         sbSaturation.setProgress(50);

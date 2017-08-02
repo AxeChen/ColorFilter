@@ -29,7 +29,6 @@ import butterknife.ButterKnife;
 public class FiltersActivity extends BaseActivity {
 
     public List<FilterBean> beenList = new ArrayList<>();
-    public Bitmap bitmap;
     public Bitmap itemBitmap;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -70,10 +69,22 @@ public class FiltersActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            bitmap.recycle();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     private String imageUrl;
+    Bitmap bitmap = null;
 
     private void setImageBitmap() {
-        Bitmap bitmap = null;
+
         if (alreadyChange) {
             bitmap = BitmapFactory.decodeFile(imageUrl);
         } else {

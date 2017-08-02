@@ -21,6 +21,8 @@
         </activity>
         <activity android:name=".ui.ColorMatrixSetActivity">
         </activity>
+        <activity android:name=".ui.SaveActivity">
+        </activity>
         <activity android:name=".ui.SelectImageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

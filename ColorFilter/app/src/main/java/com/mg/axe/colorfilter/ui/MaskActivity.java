@@ -1,13 +1,11 @@
 package com.mg.axe.colorfilter.ui;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -15,13 +13,7 @@ import android.widget.SeekBar;
 import com.mg.axe.colorfilter.R;
 import com.mg.axe.colorfilter.constant.ColorMatrixValue;
 import com.mg.axe.colorfilter.filter.FilterImageView;
-import com.mg.axe.colorfilter.utils.FileUtils;
 import com.mg.axe.colorfilter.utils.Utils;
-
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -75,6 +67,17 @@ public class MaskActivity extends BaseActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void initActionBar() {
