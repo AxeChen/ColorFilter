@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -90,6 +91,17 @@ public class ImageActivity extends AppCompatActivity {
         Bitmap bitmap = Utils.readBitmap(imageUrl, 2);
         fImage.setImageBitmap(bitmap);
         fImage.setFloat(ColorMatrixValue.src);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void initActionBar() {
