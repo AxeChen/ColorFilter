@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.mg.axe.colorfilter.R;
 import com.mg.axe.colorfilter.constant.ColorMatrixValue;
@@ -180,7 +181,12 @@ public class ColorMatrixSetActivity extends BaseActivity {
     private void apply() {
 
         for (int i = 0; i < editTexts.size(); i++) {
-            colorMatrixValue[i] = Float.parseFloat(editTexts.get(i).getText().toString());
+            try {
+                colorMatrixValue[i] = Float.parseFloat(editTexts.get(i).getText().toString());
+            } catch (NumberFormatException e1) {
+                Toast.makeText(this, "是否输入了正确的数字", Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
         adjustView.setFloat(colorMatrixValue);
     }

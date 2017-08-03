@@ -26,7 +26,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number"
+                android:maxLines="1"
+                android:maxLength="5"
                 android:textColor="@android:color/white" />
 
             <TextView
@@ -40,8 +41,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:maxLength="5"
+                android:maxLines="1"
                 android:gravity="center"
-                android:inputType="number"
                 android:textColor="@android:color/white" />
 
             <TextView
@@ -56,7 +58,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number"
+                android:maxLength="5"
+                android:maxLines="1"
                 android:textColor="@android:color/white" />
 
             <TextView
@@ -71,7 +74,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number"
+                android:maxLength="5"
+                android:maxLines="1"
                 android:textColor="@android:color/white" />
 
             <TextView
@@ -84,9 +88,10 @@
                 android:id="@+id/e"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:maxLength="5"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number"
                 android:textColor="@android:color/white" />
 
             <TextView
@@ -108,8 +113,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:maxLines="1"
+                android:maxLength="5"
                 android:gravity="center"
-                android:inputType="number"
                 android:textColor="@android:color/white" />
 
             <TextView
@@ -124,8 +130,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:maxLines="1"
+                android:maxLength="5"
                 android:gravity="center"
-                android:inputType="number"
                 android:textColor="@android:color/white" />
 
             <TextView
@@ -140,7 +147,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number"
+                android:maxLength="5"
+                android:maxLines="1"
                 android:textColor="@android:color/white" />
 
             <TextView
@@ -154,8 +162,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:maxLength="5"
+                android:maxLines="1"
                 android:gravity="center"
-                android:inputType="number"
                 android:textColor="@android:color/white" />
 
             <TextView
@@ -169,8 +178,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:maxLines="1"
+                android:maxLength="5"
                 android:gravity="center"
-                android:inputType="number"
                 android:textColor="@android:color/white" />
 
             <TextView
@@ -192,8 +202,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:maxLength="5"
                 android:gravity="center"
-                android:inputType="number"
+                android:maxLines="1"
                 android:textColor="@android:color/white" />
 
             <TextView
@@ -206,9 +217,10 @@
                 android:id="@+id/l"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="5"
                 android:layout_weight="1"
+                android:maxLines="1"
                 android:gravity="center"
-                android:inputType="number"
                 android:textColor="@android:color/white" />
 
             <TextView
@@ -221,9 +233,10 @@
                 android:id="@+id/m"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="5"
                 android:layout_weight="1"
+                android:maxLines="1"
                 android:gravity="center"
-                android:inputType="number"
                 android:textColor="@android:color/white" />
 
             <TextView
@@ -236,9 +249,10 @@
                 android:id="@+id/n"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="5"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number"
+                android:maxLines="1"
                 android:textColor="@android:color/white" />
 
             <TextView
@@ -251,9 +265,10 @@
                 android:id="@+id/o"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="5"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number"
+                android:maxLines="1"
                 android:textColor="@android:color/white" />
 
             <TextView
@@ -275,8 +290,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:maxLength="5"
+                android:maxLines="1"
                 android:gravity="center"
-                android:inputType="number"
                 android:textColor="@android:color/white" />
 
             <TextView
@@ -289,9 +305,10 @@
                 android:id="@+id/q"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="5"
                 android:layout_weight="1"
+                android:maxLines="1"
                 android:gravity="center"
-                android:inputType="number"
                 android:textColor="@android:color/white" />
 
             <TextView
@@ -306,7 +323,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:inputType="number"
+                android:maxLength="5"
+                android:maxLines="1"
                 android:textColor="@android:color/white" />
 
             <TextView
@@ -320,8 +338,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:maxLength="5"
+                android:maxLines="1"
                 android:gravity="center"
-                android:inputType="number"
                 android:textColor="@android:color/white" />
 
             <TextView
@@ -335,8 +354,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:maxLength="5"
                 android:gravity="center"
-                android:inputType="number"
+                android:maxLines="1"
                 android:textColor="@android:color/white" />
 
             <TextView
